@@ -1,0 +1,726 @@
+{
+	"info": {
+		"_postman_id": "653b89bd-e82b-4390-bfd5-07de281a04ee",
+		"name": "Sistema - Cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "address",
+					"item": [
+						{
+							"name": "[cliente logado]  - Atualizar endereço",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer  {{token-customer}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"postcode\": \"000998\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers/addresses/6",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"addresses",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[cliente logado]  - Excluir endereço",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer  {{token-customer}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/customers/addresses/5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"addresses",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cliente logado  - Cadastrar endereço",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer  {{token-customer}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"postcode\": \"111\",\n    \"country\": \"br\",\n    \"state\": \"Rio de Janeiro\",\n    \"city\": \"Rio das Ostras\",\n    \"region\": \"region\",\n    \"street_1\": \"rua bangu\",\n    \"street_2\": \"123\",\n    \"street_3\": \"casa\",\n    \"shipping_id\": 3\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers/addresses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cliente  - atualizar endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2384845a-29a5-4ac0-a54c-4ad9c89a6bc7",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer  {{token-customer}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"postcode\": \"88888\",\n    \"country\": \"kkkkk\",\n    \"state\": \"sas\",\n    \"city\": \"sas\",\n    \"region\": \"asa\",\n    \"street_1\": \"sasa\",\n    \"street_2\": \"sas\",\n    \"street_3\": \"sdsd\",\n    \"street_4\": \"qqq\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers/addresses/6",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"addresses",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "customer",
+					"item": [
+						{
+							"name": "Cadastrar cliente",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Peter\",\n\t\"email\": \"teste4454@gmail.com\",\n\t\"password\": \"teste1234\",\n\t\"telephone\": \"21971989961\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Realizar Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2e25800a-d065-49ae-a488-313e132f3468",
+										"exec": [
+											"let json =  pm.response.json();\r",
+											"\r",
+											"let varEnvironment = (json.is_admin == 1) ? \"token\" : \"token-customer\";\r",
+											"\r",
+											"pm.environment.set(varEnvironment, json.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"customer@gmail.com\",\n\t\"password\": \"customer123\",\n\t\"remember_me\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cliente logado - Logout",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer  {{token-customer}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"peterclayder@id.uff.br\",\n\t\"password\": \"p1p2lspc\",\n\t\"remember_me\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/customers/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cliente  logado - retornar dados do cliente",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer  {{token-customer}}"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/customers/logged",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"customers",
+										"logged"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "cliente logado  - adicionar item no carrinho",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"qty\": 1, \n\t\"obs\": \"Sem salada\",\n\t\"product_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/carts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cliente logado - atualizar item do carrinho",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"qty\": 1, \n\t\"obs\": \"obs2\",\n\t\"product_id\": 3, \n\t\"additionals_id\": [1,2]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/carts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cliente logado  - retornar itens do carrinho",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/carts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "cliente logado - criar pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"addressId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cliente logado - retornar todos os pedidos do cliente logado",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customers/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cliente logado - retornar pedido pelo id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer  {{token-customer}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customers/orders/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shipping",
+			"item": [
+				{
+					"name": "Retornar endereços dos fretes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/shippings",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"shippings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar endereços dos fretes pelo id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer  {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/shippings/9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"shippings",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "Retornar produto.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retonrar produto pelo id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar produto pelo nome",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/products/q/ha",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"q",
+								"ha"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1649fe64-fcee-43af-807d-b9301c4f2f62",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ac53bf0-4d43-4084-8359-e0bec1b7c04d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ef575dfa-7a8f-41ed-85a2-ee930c1d4039",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "43005f47-f119-4b3e-8c7e-a6d0d351c5c7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
